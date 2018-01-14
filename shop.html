@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crazy Cassiel's Crafts Shop</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<link rel = "stylesheet" type = "text/css" href = "CCCstyles.css" />
+
+    <!--
+	  What objectives are you demonstrating?
+	  
+      The shop is interactive and takes user input in the form of the quantity of shop items
+      to be ordered. When submitted to the cart through a server, an invoice is created
+      that displays the order items selected and the total price of the order to the user.
+    -->
+
+  <style>
+
+		/* Changes the apperance of input fields on menu */
+		input[type=number] 
+		{
+			-moz-appearance: textfield;
+			text-align: center;
+			width: 40px;
+		}
+
+		/* Removes arrow spinners from input fields */
+		input[type=number], input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-out-spin-button 
+		{
+			-webkit-appearance: none;
+			margin: 0px;
+		}
+
+		h1 
+		{
+			display: inline;
+		}
+
+		ul, li 
+		{
+			list-style-type: none;
+		}
+
+		#itemType
+		{
+			height:180px; 
+			width:800px; 
+			background-color:#233552; 
+			border:#43527f solid 2px; 
+			margin-left:182px; 
+			margin-top:10px
+		}
+
+		section 
+		{
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 10px;
+			width: 700px;
+			color: #fff;
+		}
+
+		#yarnArts
+		{
+			margin: 2% 2% 2% 15%;
+			float: left;
+		}
+
+		#sewing, #jewelry, #paperCraft,#painting 
+		{
+			margin: 2% 2% 2% 2%;
+			float: left;
+		}
+
+		img
+		{
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			height:100px; 
+			width:100px;
+		}
+
+		/* Stylize the submit button */
+		#button, #reset, #cName,  #finish
+		{
+			margin-top: 20px;
+			margin-left: 40%;
+			width: 20%;
+		}
+
+		/* Appearance of invoice field */
+		#invoice 
+	   {
+			background-color: white;
+			color:#660000;
+			border: 3px #000000 solid;
+			margin-left: 36%;
+			height: 225px;
+			width: 325px;
+			overflow: scroll;
+	   }
+	
+  </style>
+
+  <script>
+
+    /* Toggles each menu category input fields. Only one menu category at a time can be opened */
+    $(document).ready(function() {
+    /* Hides all menu fields on page load */
+    $("#yarnList, #sewingList, #jewelList, #paperList, #paintList").hide();
+    $("#yarnArts").click(function() {
+      $("#yarnList").fadeToggle();
+      $(".toggle").not(yarnList).hide();
+    });
+    $("#sewing").click(function() {
+      $("#sewingList").fadeToggle();
+      $(".toggle").not(sewingList).hide();
+    });
+    $("#jewelry").click(function() {
+      $("#jewelList").fadeToggle();
+      $(".toggle").not(jewelList).hide();
+    });
+    $("#paperCraft").click(function() {
+      $("#paperList").fadeToggle();
+      $(".toggle").not(paperList).hide();
+    });
+    $("#painting").click(function() {
+      $("#paintList").fadeToggle();
+      $(".toggle").not(paintList).hide();
+    });
+  });
+
+  /* Function orderTotal takes user input and calculates final price to be displayed in invoice
+     area along with order items */
+  function orderTotal(formData) {
+
+    var total = 0;      // sets order total to zero
+    var msg2 = "";      // sets msg2 to empty string
+    /* Goes through each menu category field. */
+    $(".price").each(function() {
+      /* Multiply input by price of item (data-value) */
+      total += parseFloat(this.value * $(this).data("value"));
+        /* If the input box is not empty, set msg2 to the name of item ordered and quantity ordered */
+        if($(this).val() !== "") {
+          msg2 += (this.name)+": "+(this.value)+"<br />";
+       }
+    });
+
+    var formatTotal = total.toFixed(2);
+    /* Print order total and items ordered in the invoice section with formatting */
+    document.getElementById('invoice').innerHTML = "Order Total: $"+formatTotal+"<br /><br /> Your order includes: <br />"+msg2+"<br />";
+
+  }
+
+  function clearInvoice() {
+    document.getElementById('invoice').innerHTML = "";
+  }
+
+  </script>
+
+  </head>
+
+    <body>
+		<!-- Provide side menu to other pages on website -->
+	   <aside>
+		   <nav>
+			   <ul>
+					<li><a href="home.html">Home</a></li>
+					<li><a href="shop.html">Shop</a></li>
+					<li><a href="locations.html">Locations</a></li>
+					<li><a href="contact.html">Contact Me</a></li>
+				</ul>
+			</nav>
+		</aside>
+		
+		<!-- Title the page -->
+		<div id="banner"> <b> Crazy Cassiel's Crafts! </b> </div>
+
+		<!-- Creates a form for user input, taken in by jQuery -->
+		<form method="get" action="shop.php" target="_blank">
+		
+			<!-- Creates div to hold menu category links/images to open each field -->
+			<div id="itemType">
+			 
+				<div id="yarnArts" style="margin-left:13px;">
+					<h1><a href="#">Yarn Arts</a></h1><br />
+					<img src="Yarn.jpg"/>
+				</div>
+				<div id="sewing">
+					<h1><a href="#">Sewing</a></h1><br />
+					<img src="Sewing.jpg" />
+				</div>
+				<div id="jewelry">
+					<h1><a href="#">Jewelry</a></h1><br />
+					<img src="Jewelry.jpg" />
+				</div>
+				<div id="paperCraft">
+					<h1><a href="#">Paper Crafts</a></h1><br />
+					<img src="Paper.jpg" />
+				</div>
+				<div  id="painting">
+					<h1><a href="#">Painting</a></h1><br />
+					<img src="Painting.jpg" />
+				</div>
+			</div> 
+				<!-- Creates sections for each shop category with input fields. Each input has a name
+				   to be displayed, class for jQuery, and data-value is used to give the item a price.
+				   Using data-value instead of value allows the price to be used in calculations without
+				   it being displayed in the number input box on page load. -->
+
+		    <section id="yarnList" class="toggle">
+				<input type="number" name="knittingNeedles" data-value="14" class="price" /> Knitting Needles - $14.00<br />
+					<p style="margin-left:70px">Needles of your choice of materials. Packs include sizes from US 5 to 12.</p>
+					
+				<input type="number" name="crochetHooks" data-value="12" class="price" /> Crochet Hooks - $12.00<br />
+					<p style="margin-left:70px">Hooks of your choice of materials. Packs include metric sizes 2.5mm to 9mm.</p>
+					
+				<input type="number" name="yarnSkein" data-value="8.50" class="price" /> Skein of Yarn - $8.50<br />
+					<p style="margin-left:70px">Choose from available colors and yarn weights. One skein each.</p>
+					
+				<input type="number" name="stichMarkers" data-value="4.50" class="price" /> Stitch Markers - $4.50<br />
+					<p style="margin-left:70px">30 easy to use stitch markers to help keep track of pattern changes or number of stitches.</p>
+					
+				<input type="number" name="weaverLoom" data-value="18" class="price" /> Weaver's Loom - $18.00<br />
+					<p style="margin-left:70px">A 20x20 inch loom for weaving on the go.
+				</p>
+			</section>
+
+		    <section id="sewingList" class="toggle">
+				<input type="number" name="basicKit" data-value="16.50" class="price" /> Basic Kit - $16.50<br />
+					<p style="margin-left:70px">Kit include four easy-threading ewing needles, thimble, pins and pincushion, 
+					 seamstress' measuring tape and fabric scissors.</p>
+					
+				<input type="number" name="fabric" data-value="19" class="price" /> Fabric - $19.00<br />
+					<p style="margin-left:70px">4 yards of fabric in your choice of colors, prints and textures.</p>
+					
+				<input type="number" name="thread" data-value="15" class="price" /> Thread - $15.00<br />
+					<p style="margin-left:70px">pack of 5 spools of thread in your choice of colors. Mix and match.</p>
+					
+				<input type="number" name="sewingMachine" data-value="27" class="price" /> Sewing Machine - $27.00<br />
+					<p style="margin-left:70px">Strong sewing machine with easy stitch type and speed controls. Built in light to make 
+					seeing your stitches easier</p>
+					
+				<input type="number" name="mannequin" data-value="32.50" class="price" /> Sewing Mannequin - $32.50<br />
+					<p style="margin-left:70px">Resizable maannequin in your choice of male or female.</p>
+		    </section>
+
+		    <section id="jewelList" class="toggle">
+				<input type="number" name="pliers" data-value="8" class="price" /> Pliers - $8<br />
+					<p style="margin-left:70px">Smooth, non marking, jewelry pliers. Great for twiting wire or working with chains and 
+					jump rings</p>
+					
+				<input type="number" name="wire" data-value="8.50" class="price" /> Jewelry Wire - $8.50<br />
+					<p style="margin-left:70px"> 1 spool of your choice of wire. Available gauges: 12 to 24.</p>
+					
+				<input type="number" name="beadString" data-value="7" class="price" /> String of Beads - $7.00<br />
+					<p style="margin-left:70px">Beautiful beads. Strings may vary in bead quantity based on material.</p>
+					
+				<input type="number" name="clasps" data-value="8" class="price" /> Clasps - $8.00<br />
+					<p style="margin-left:70px">3oz assortment of different types of clasps in your choice of colors.</p>
+					
+				<input type="number" name="chain" data-value="9" class="price" /> Jewelry Chains - $9.00<br />
+					<p style="margin-left:70px">Chain available in your choice of colors. Spool length may vary by chain intricacy.</p>
+		    </section>
+
+		    <section id="paperList" class="toggle">
+				<input type="number" name="cardstock" data-value="6" class="price" /> Cardstock - $6.00<br />
+					<p style="margin-left:70px">12x12 inch pad of 25 pages in brilliant colors and prints.</p>
+				
+				<input type="number" name="washi" data-value="7.50" class="price" /> Washi Paper - $7.50<br />
+					<p style="margin-left:70px">Japanese origami paper. Pack of 10 9x9 inch colorful printed sheets.</p>
+				
+				<input type="number" name="scissors" data-value="4.50" class="price" /> Scissors - $4.50<br />
+					<p style="margin-left:70px">Choice of plain or textured scissors. Priced per pair.</p>
+				
+				<input type="number" name="glue" data-value="3" class="price" /> Fast Drying Glue - $3.00<br />
+					<p style="margin-left:70px">Fast drying, clear glue. Excellent for easy, fast creations. Tacky for 1 minute, sets in 3. </p>
+				
+				<input type="number" name="knife" data-value="5.50" class="price" /> Exacto Knife - $5.50<br /> 
+					<p style="margin-left:70px">For all the tiny cuts scissors cannot make, sharp exacto knife is perfect.</p>
+		    </section>
+		  
+		    <section id="paintList" class="toggle">
+				<input type="number" name="palette" data-value="4" class="price" /> Paint Palette - $4.00<br />
+					<p style="margin-left:70px">Every artist needs a paint palette. Great for mixing multiple colors at once. Easy to clean.</p>
+					
+				<input type="number" name="brushes" data-value="2.50" class="price" /> Paint Brushes - $2.50<br />
+					<p style="margin-left:70px">Pack of four assorted brushes in your choice of size or shape.</p>
+				  
+				<input type="number" name="paintPencil" data-value="3.50" class="price" /> Watercolor Pencils - $3.50<br />
+					<p style="margin-left:70px">Pack of 12 watercolor pencils. Makes watercolor art a little easier.</p>
+				  
+				<input type="number" name="paintBottle" data-value="4.50" class="price" /> 6oz Bottle of Paint - $4.50<br />
+					<p style="margin-left:70px">Available in your choice of paint type and color.</p>
+				  
+				<input type="number" name="canvas" data-value="10.50" class="price" /> Canvas - $10.50<br />
+					<p style="margin-left:70px">14x12 inch canvas in your choice of stretched or board style.</p>
+		    </section>
+			<!-- Creates submit button to send user input to orderTotal function for processing -->
+			<input type="button" value="Submit" id="button" onclick="orderTotal(this.form)" /><br />
+			
+			<!-- Creates button to reset user input fields and clears invoice section by the clearInvoice function when clicked.  -->
+			<input type="reset" value="Start Order Over" id="reset" onclick="clearInvoice()"><br /><br/>
+			<label style="margin-left: 40%; color:white;">Name for order:</label>
+			<input type="text" name="custName" size="12" id="cName" required />
+			<input type="submit" value="Finished? Get Your Receipt" name="receiptBtn" id="finish" />
+		</form>
+
+		<!-- Creates section to display order total and items ordered after processing by orderTotal function -->
+		<section id="invoice">
+
+		</section>
+    </body>	
+</html>

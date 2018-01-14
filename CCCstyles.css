@@ -1,0 +1,98 @@
+/*==========================
+FOR COMPUTERS
+===========================*/
+
+body
+{
+	background: url('CB2.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover; 
+}
+
+#banner
+{
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+	margin-left: 25%;
+	font-size: 45px; 
+	text-align: center; 
+	width: 50%; 
+	height: 105px; 
+	background-image: url('yarns.jpg'); 
+	background-repeat: no-repeat;
+	background-size: cover; 
+	color: #FFDF00; 
+	padding-top: -25px;
+	
+	/* For firefox */
+	-moz-border-radius-topleft: 30px 40px;
+	-moz-border-radius-topright: 30px 40px;
+	-moz-border-radius-bottomleft: 30px 40px;
+	-moz-border-radius-bottomright: 30px 40px;
+	/* For chrome */
+	-webkit-border-top-left-radius: 30px 40px;
+	-webkit-border-top-right-radius: 30px 40px;
+	-webkit-border-bottom-left-radius: 30px 40px;
+	-webkit-border-bottom-right-radius: 30px 40px;
+	/* For default */
+	border-top-left-radius: 30px 40px;
+	border-top-right-radius: 30px 40px;
+	border-bottom-left-radius: 30px 40px;
+	border-bottom-right-radius: 30px 40px;
+}
+/*navigation styles*/
+aside
+{
+	margin: -5px;
+}	
+
+nav 
+{
+	margin-bottom: 20px;
+	position: fixed;
+	margin-top: 0px;
+	margin-left: 0px;
+}
+				 
+nav ul li 
+{
+	font-size: 22px;
+	line-height: 1.6em;
+	margin: 5px 0px 7px -15px;
+	list-style:none;
+}
+					
+nav ul li:first-of-type 
+{
+	margin-top: 20px;
+}
+
+nav ul li:last-of-type 
+{
+	padding-bottom: 30px;
+}
+
+nav ul li a 
+{
+	color: rgb(254, 232, 130);
+}
+
+nav ul li a:hover 
+{
+	color: rgb(211, 254, 106);
+	text-decoration: overline underline;
+}
+
+  a:link
+  {
+      color: #fff;
+      text-decoration: none;
+  }
+
+  a:visited
+  {
+      color: #fff;
+      text-decoration: none;
+  }
+  

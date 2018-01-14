@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Crazy Cassiel's Crafts Locations</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href='https://fonts.googleapis.com/css?family=Nosifer' rel='stylesheet' type='text/css'>
+		<script src="modernizr-1.5.js" type="text/javascript" ></script>
+		<link rel = "stylesheet" type = "text/css" href = "CCCstyles.css" />
+		<!--
+			What objectives are you demonstrating?
+			
+			The Locations Page fills a div with a list of at least 3 cities for each 
+			selected state (of at least 4 states). It demonstrates the use of InnerHTML
+			to fill the div.  It will also provide a drop down menu to
+			select the 4 states. 
+		-->
+		​
+		<style>
+			​
+			/* large red titles */
+			h1 
+			{  
+				font-family: Nosifer;
+				margin: 30px 0px 30px 0px;
+				font-size: 400%;
+				text-align: center;
+				color: #ffffff;
+			}
+
+			/* allow some separation between cities */
+			h2 
+			{ 
+				margin-bottom: 10px;
+				margin-left: 30px;
+				color: #cd0000;
+				text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+				font-size: 25px;
+			}
+			h3
+			{ 
+				margin-bottom: 0px;
+				margin-left: 30px;
+				margin-top: 10px;
+				color: #ccddff;
+			}
+			
+			p
+			{
+				margin-bottom: 0px;
+				margin-left: 30px;
+				margin-top: 5px;
+				color: #ffffff;
+			}
+
+			/* The state drop down should match cities container */
+			#stateForm 
+			{
+				margin-left: 25%;
+				padding-bottom: 10px;
+			}
+			  
+			 /* message container will take most of screen and float left */
+			#cities 
+			{
+				background-image: url('rope.png');
+				background-repeat: no-repeat; 
+				background-size: contain;
+				border: 1px #990000 solid;
+				height: 400px;
+				width: 530px;
+				margin-left: 26%;
+			}
+			​
+			/* prepare box for message with border and padding */
+			#message 
+			{ 
+				border-style: groove;
+				padding: 25px 50px; 
+				line-height: 1em;
+			}  
+			​  
+			/* Reset/submit buttons should match font and field sizes */
+			input[type=button], input[type=submit]  
+			{
+				font-size: 24px;
+				width: 100px;  
+				height: 35px;
+			}
+
+			select 
+			{
+				font-size: 24px; 
+				height: 35px;
+			}
+
+		</style>
+
+		​<script>
+			/* Takes an array of city information for a particular state and
+			 * writes the content of the array to the screen as a list of 
+			 * locations
+			 */
+			function cityFill(cityArray, stateName)
+			{  
+			   var cityMsg = "<h2>Locations in "+ stateName + "</h2>";  //title
+			   var cityLength = cityArray.length;  //number of cities in array
+			   
+			   //loop through each city and write it to the output string
+			   for (var i=0; i < cityLength; i++)
+			   {     
+				  //append to string the city name (bold) and address/phone
+				  cityMsg += "<h3>"+cityArray[i][0]+"</h3>" +  //name (bold)
+							  "<p>"+cityArray[i][1] +"</p>" +      //address
+							  "<p>"+cityArray[i][2] +"</p><br />"; //phone
+			   }
+			   //add extra line
+			   cityMsg += "<br /><p>Other locations can be viewed by selecting another state!</p>";
+			   
+			   //write to screen/div
+			   document.getElementById("message").innerHTML = cityMsg;
+			   
+			}
+			/* Gets the state value from the select box, defines the arrays for each
+			 * state and passes that to function to fill the results box
+			 */
+			function fillState()
+			{  
+			   //Get the state selected
+			   state = document.getElementById("stateSelect").value;
+
+			   //Check if the state was selected, and clear results if not
+			   if ((state=="")||(state==null))
+			   {
+				  //reset list
+				   document.getElementById("message").innerHTML = "";
+			   }
+			   else
+			   {   
+				   //arrays for each state list array of locations with city name/address/phone
+				  var waCities =[["Bremerton (HQ)","1600 Chester Ave","(360) 045-2222"], 
+								 ["Tacoma","555 Smelly Ave","(253) 001-3333"],
+								 ["Spokane","111 Tree Ln","(509) 999-0001"]];
+				  var orCities =[["Portland","123 Bridge Way","(503) 045-2222"], 
+								 ["Salem","555 Witch Ave","(458) 001-3333"],
+								 ["Beaverton","111 Valley Rd","(971) 999-0001"]];
+				  var idCities =[["Boise","123 Potato Rd","(208) 045-2222"], 
+								 ["Nampa","555 Farmer Joe Ln","(208) 001-3333"],
+								 ["Meridian","111 Market Alley","(208) 999-0001"]];
+				  var caCities =[["San Francisco","123 Misty Hwy","(415) 045-2222"], 
+								 ["San Jose","555 Silicon Rd","(408) 001-3333"],
+								 ["Sacramento","111 Railroad Ln","(916) 999-0001"]];
+			   
+				  //decide which state array to write to screen   
+				  switch (state)
+				  {  case "Washington":   cityFill(waCities, state); break;
+					 case "Idaho":        cityFill(idCities, state); break;
+					 case "Oregon":       cityFill(orCities, state); break;
+					 case "California":   cityFill(caCities, state); break;
+				  }
+			   }
+			}
+		</script>
+	</head>
+	<body onload=fillState()>
+
+	    <!-- Provide side menu to other pages on website -->
+	   <aside>
+		   <nav>
+			   <ul>
+					<li><a href="home.html">Home</a></li>
+					<li><a href="shop.html">Shop</a></li>
+					<li><a href="locations.html">Locations</a></li>
+					<li><a href="contact.html">Contact Me</a></li>
+				</ul>
+			</nav>
+		</aside>
+	   
+		<!-- Title the page -->
+		<div id="banner"> <b> Crazy Cassiel's Crafts! </b> </div>
+	 
+	    <!-- Form has one field for state selection -->
+	    <form id="stateForm" > 
+			<label for="state" id="stateLabel" style="color: #fff">Enter desired state:</label> <br />  
+			<!-- provide a list of states to select from -->
+			<select id="stateSelect" onchange="fillState()">
+				<!-- <option name="state" value="" selected></option> Nothing selected to start -->
+				<option name="state" value="California">California</option>
+				<option name="state" value="Idaho">Idaho</option>
+				<option name="state" value="Oregon">Oregon</option>
+				<option name="state" value="Washington" selected>Washington</option>
+			</select>
+	    </form> 
+	  
+		<!--div to fill with city list programmatically -->
+		<div id="cities">
+			<section id="message">
+			</section>
+		</div>
+	</body>
+</html>
